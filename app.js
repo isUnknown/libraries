@@ -412,6 +412,22 @@ export class Img {
 }
 
 export class Data {
+
+    static async fetchApiData (apiUrl) {
+        let headers = new Headers()
+        let username = 'adrien.payet@outlook.com'
+        let password = 'Ap&216991'
+        headers.set('Authorization', 'Basic ' + btoa(username + ":" + password))
+
+        const rawData = await fetch(apiUrl, {
+            method: "GET",
+            headers: headers
+        })
+        const jsonData = await rawData.json()
+        const data = await jsonData.data
+    
+        return data
+    }
     
     static update(siteUrl, page, key, value) {
         fetch(`${siteUrl}/update-data/${key}/${value}/${page}`, {
